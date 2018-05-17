@@ -1,0 +1,16 @@
+<h1 style="text-align: center">Enter your photo</h1>
+<div style="display: flex; justify-content: space-evenly">
+  <div style="display: flex; flex-direction: column">
+    <mat-form-field>
+      <input type="text" matInput placeholder="Happy" #happy>
+    </mat-form-field>
+    <img class="swp-img" [src]="happy.value" *ngIf="happy.value">
+  </div>
+  <div style="display: flex; flex-direction: column">
+    <mat-form-field>
+      <input type="text" matInput placeholder="Sad" #sad>
+    </mat-form-field>
+    <img class="swp-img" [src]="sad.value" *ngIf="sad.value">
+  </div>
+</div>
+
