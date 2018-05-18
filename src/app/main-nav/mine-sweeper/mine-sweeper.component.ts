@@ -7,17 +7,7 @@ import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MineSweeperComponent implements OnInit {
-  sweeperArr = [
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 1, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 1, 0, 0, 0, 1, 0, 0],
-    [0, 0, 0, 0, 1, 0, 1, 0, 0],
-    [0, 0, 1, 0, 0, 1, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 1, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [1, 0, 0, 0, 0, 0, 1, 0, 0]
-  ];
+  sweeperArr = [];
 
   boardSizes = [[9, 9], [9, 12], [12, 15], [15, 20], [20, 30]];
 

@@ -5,7 +5,7 @@
 }
 
 .header {
-  width: calc(9 * 90px);
+  width: calc(9 * 80px);
   display: flex;
   justify-content: space-between;
   align-items: baseline;
@@ -13,6 +13,39 @@
 
 .field {
   border: 1px solid rgba(0, 0, 0, 0.1);
-  height: 4.8rem;
-  max-width: 1rem;
+  height: 5rem;
+  width: 5rem;
+  min-width: unset;
+  max-width: unset;
+}
+
+@media (max-width: 920px) {
+  .header {
+    width: calc(9 * 65px);
+  }
+
+  .field {
+    height: 4rem;
+    width: 4rem;
+    min-width: unset;
+    max-width: unset;
+  }
+}
+
+@media (max-width: 600px) {
+  .header {
+    width: 100%;
+    font-size: 0.8rem;
+  }
+
+  .header__board-size {
+    width: 8rem;
+  }
+
+  .field {
+    height: 3rem;
+    width: 3rem;
+    min-width: unset;
+    max-width: unset;
+  }
 }

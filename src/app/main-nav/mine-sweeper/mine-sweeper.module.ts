@@ -3,7 +3,14 @@ import { CommonModule } from '@angular/common';
 import {MineSweeperComponent} from './mine-sweeper.component';
 import {MineSweeperRoutingModule} from './mine-sweeper-routing.module';
 import {FormsModule} from '@angular/forms';
-import {MatButtonModule, MatFormFieldModule, MatOptionModule, MatSelectModule, MatSliderModule} from '@angular/material';
+import {
+  MatButtonModule,
+  MatFormFieldModule,
+  MatIconModule,
+  MatOptionModule,
+  MatSelectModule,
+  MatSliderModule, MatTooltipModule
+} from '@angular/material';
 
 @NgModule({
   imports: [
@@ -15,6 +22,8 @@ import {MatButtonModule, MatFormFieldModule, MatOptionModule, MatSelectModule, M
     MatFormFieldModule,
     MatSelectModule,
     MatOptionModule,
+    MatIconModule,
+    MatTooltipModule
   ],
   declarations: [
     MineSweeperComponent

@@ -1,9 +1,8 @@
 import {NgModule} from '@angular/core';
 import {PreloadAllModules, RouterModule} from '@angular/router';
-// import {MainNavComponent} from './main-nav/main-nav.component';
 
 const appRoutes = [
-  // {path: '', component: MainNavComponent}
+  {path: '**', redirectTo: 'mine-sweeper'}
 ];
 
 @NgModule({

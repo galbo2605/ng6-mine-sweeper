@@ -1,24 +1,34 @@
 <div class="container">
   <div class="header">
     <div>
-      <mat-form-field>
-        <mat-select placeholder="Board Size (x, y)" #bSize [value]="boardSizes[0]"
+      <mat-form-field class="header__board-size">
+        <mat-select #bSize
+                    placeholder="Board Size"
+                    [value]="boardSizes[0]"
                     (selectionChange)="setBoardDifficulty(bSize.value[0],bSize.value[1])">
           <mat-option *ngFor="let size of boardSizes" [value]="[size[0],size[1]]">
-            {{size[0]}} by {{size[1]}}</mat-option>
+            {{size[0]}} by {{size[1]}}
+          </mat-option>
         </mat-select>
       </mat-form-field>
     </div>
-    <div><span>Score: {{score}}</span></div>
     <div>
-      <mat-slider [min]="0.05"
+      <button mat-icon-button
+              matTooltip="Refresh Board"
+              color="warn"
+              (click)="bomb=false; setBoardDifficulty(bSize.value[0],bSize.value[1]); score=0">
+        <mat-icon>refresh</mat-icon>
+      </button> Score: {{score}}
+    </div>
+    <div>
+      <span>Easiness: {{difficulty}}</span>
+      <mat-slider [min]="0.1"
                   [max]="1.7"
                   [step]="0.1"
                   [thumbLabel]="true"
                   [tickInterval]="'auto'"
                   (change)="setBoardDifficulty(bSize.value[0],bSize.value[1])"
                   [(ngModel)]="difficulty"></mat-slider>
-      <span>Easiness: {{difficulty}}</span>
     </div>
   </div>
   <table>
@@ -36,9 +46,4 @@
     </tr>
     </tbody>
   </table>
-  <button style="width: calc(8*88px);"
-          mat-raised-button
-          color="primary"
-          (click)="bomb=false; setBoardDifficulty(bSize.value[0],bSize.value[1]); score=0">Reset Board
-  </button>
 </div>
