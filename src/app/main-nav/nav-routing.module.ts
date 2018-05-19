@@ -4,10 +4,12 @@ import {QuestionsComponent} from './questions/questions.component';
 
 const navRoutes = [
   {path: 'mine-sweeper', loadChildren: './mine-sweeper/mine-sweeper.module#MineSweeperModule'},
-  {path: 'boom-stats', loadChildren: './employees/employees.module#EmployeesModule'},
-  {path: 'custom-photo', loadChildren: './customers/customers.module#CustomersModule'},
-  {path: 'questions', component: QuestionsComponent}
+  {path: 'boom-stats', loadChildren: './boom-stats/boom-stats.module#BoomStatsModule'},
+  {path: 'custom-photo', loadChildren: './custom-photo/custom-photo.module#CustomPhotoModule'},
+  {path: 'questions', component: QuestionsComponent},
+  {path: '**', redirectTo: 'mine-sweeper'},
 ];
+
 @NgModule({
   imports: [RouterModule.forChild(navRoutes)],
   exports: [RouterModule]

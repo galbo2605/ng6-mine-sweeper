@@ -1,0 +1,15 @@
+<mat-toolbar>
+  Header
+  <span style="flex: 1 auto"></span>
+  <a [routerLink]="''">Leave Room</a>
+</mat-toolbar>
+<div class="chat-container">
+
+</div>
+<mat-toolbar class="footer">
+  <mat-form-field>
+    <input matInput placeholder="Message" #message>
+  </mat-form-field>
+  <span style="flex: 1 auto"></span>
+  <button mat-button (click)="onSendMessage(message.value)">Send</button>
+</mat-toolbar>

@@ -1,12 +1,17 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, HostBinding, OnInit} from '@angular/core';
+import {slideInDownAnimation} from '../../animations/animations';
 
 @Component({
   selector: 'app-mine-sweeper',
   templateUrl: './mine-sweeper.component.html',
   styleUrls: ['./mine-sweeper.component.css'],
+  animations: [slideInDownAnimation],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MineSweeperComponent implements OnInit {
+  @HostBinding('@routeAnimation') routeAnimation = true;
+  @HostBinding('style.display') display = 'block';
+
   sweeperArr = [];
 
   boardSizes = [[9, 9], [9, 12], [12, 15], [15, 20], [20, 30]];
@@ -25,41 +30,6 @@ export class MineSweeperComponent implements OnInit {
         this.sweeperArr[i].push(Math.round((Math.random()) / this.difficulty));
       }
     }
-    // const numberOfBombs = gridBlock.reduce((previousValue, currentRow, currentRowIndex) => {
-    //   // get (up to 3) rows between y - 1 < y < y + 1
-    //   if (this.isBetween(currentRowIndex, (y - 1), (y + 1))) {
-    //     // concat to new single array
-    //     return previousValue.concat(
-    //       // filter values between x - 1 < x < x + 1
-    //       currentRow.filter((value, index) => this.isBetween(index, (x - 1), (x + 1)))
-    //     );
-    //   } else {
-    //     // return total concatenated rows
-    //     return previousValue;
-    //   }
-    // }, []).filter(value => value).length;
-    // const test = gridBlock.map((value, index) => {
-    //   if (this.isBetween(index, (y - 1), (y + 1))) {
-    //     const v = value.filter((value1, index1) => this.isBetween(index1, (x - 1), (x + 1)));
-    //     console.log(v);
-    //     return v;
-    //   }
-    // });
-    // const test = gridBlock.reduce((all, item, index, array) => {
-    //   if (this.isBetween(index, y - 1, y + 1)) {
-    //     return +all + (item[x - 1] + item[x] + item[x + 1]);
-    //   } else {
-    //     return all;
-    //   }
-    // }, '');
-    // const numberOfBombs = gridBlock.reduce((all, item, index) =>
-    //     // short circuit evaluation x = 0 = truth (will not execute past &&)
-    //     this.isBetween(index, y - 1, y + 1) ? all.concat(item.slice(x && x - 1, x + 2)) : all
-    //   , []).filter(value => value).length;
-    // return `(${y}, ${x}), ${numberOfBombs} bombs`;
-    // isBetween(n, a, b) {
-    //   return (n - a) * (n - b) <= 0;
-    // }
   }
 
   onSweep(y: number, x: number, fieldBtn?) {

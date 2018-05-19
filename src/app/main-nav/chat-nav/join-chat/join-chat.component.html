@@ -1,0 +1,10 @@
+<mat-toolbar style="background-color: rgba(0,13,191,0.36); color: white">Join a Room</mat-toolbar>
+<div class="join-chat-container">
+  <mat-form-field>
+    <input matInput placeholder="Name" #name>
+  </mat-form-field>
+  <mat-form-field >
+    <input matInput placeholder="Room" #room>
+  </mat-form-field>
+  <a [routerLink]="[{ outlets: { chatRouter: ['room'] } }]">Join Room</a>
+</div>

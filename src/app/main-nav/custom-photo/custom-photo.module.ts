@@ -1,19 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {CustomersComponent} from './customers.component';
-import {CustomersRoutingModule} from './customers-routing.module';
+import {CustomPhotoComponent} from './custom-photo.component';
+import {CustomPhotoRoutingModule} from './custom-photo-routing.module';
 import {MatButtonModule, MatFormFieldModule, MatInputModule} from '@angular/material';
 
 @NgModule({
   imports: [
     CommonModule,
-    CustomersRoutingModule,
+    CustomPhotoRoutingModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule
   ],
   declarations: [
-    CustomersComponent
+    CustomPhotoComponent
   ]
 })
-export class CustomersModule { }
+export class CustomPhotoModule { }

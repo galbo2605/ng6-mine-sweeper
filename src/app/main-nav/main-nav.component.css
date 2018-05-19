@@ -20,7 +20,14 @@
   width: 100%;
 }
 
+.chat-nav {
+  width: 20rem;
+  box-shadow: 3px 0 6px rgba(0, 0, 0, .24);
+  margin-top: 64px;
+}
+
 .content-container {
+  overflow: hidden;
   margin-top: 64px;
   padding: 1rem;
   height: calc(100vh - 64px);

@@ -1,0 +1,12 @@
+.header {
+}
+
+.chat-container {
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  background-color: rgba(0,0,255,0.10);
+  font-size: 1rem;
+}
