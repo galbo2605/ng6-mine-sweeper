@@ -1,15 +1,31 @@
-<mat-toolbar>
-  Header
-  <span style="flex: 1 auto"></span>
-  <a [routerLink]="''">Leave Room</a>
-</mat-toolbar>
 <div class="chat-container">
-
-</div>
-<mat-toolbar class="footer">
-  <mat-form-field>
-    <input matInput placeholder="Message" #message>
-  </mat-form-field>
+  <mat-toolbar class="chat-header">
+    {{chat.room}}
+    <button mat-icon-button
+            matTooltip="Leave Room"
+            [routerLink]="''"><mat-icon>close</mat-icon></button>
+  </mat-toolbar>
+  <div class="chat-messages">
+    <ng-container #chatMessages></ng-container>
+  </div>
   <span style="flex: 1 auto"></span>
-  <button mat-button (click)="onSendMessage(message.value)">Send</button>
-</mat-toolbar>
+  <mat-toolbar class="chat-footer">
+    <mat-form-field>
+      <input matInput placeholder="Message" value="test" #message>
+    </mat-form-field>
+    <button mat-button
+            matTooltip="Send"
+            (click)="onSendMessage(message.value, chat.user); message.value=returnRandom()">
+      <mat-icon>send</mat-icon>
+    </button>
+  </mat-toolbar>
+</div>
+<ng-template #messageTemplate let-messageV1="message" let-from="from" let-time="time">
+  <div class="chat-message" @routeAnimation>
+    <div class="chat-message__header">
+      <span class="chat-message__header__room">{{from}}</span>
+      <span class="chat-message__header__time">{{time}}</span>
+    </div>
+    <p class="chat-message__message">{{messageV1}}</p>
+  </div>
+</ng-template>

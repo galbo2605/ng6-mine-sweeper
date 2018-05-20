@@ -8,7 +8,7 @@ import {
   MatIconModule,
   MatListModule,
   MatSidenavModule, MatSliderModule,
-  MatToolbarModule,
+  MatToolbarModule, MatTooltipModule,
 } from '@angular/material';
 import {MainNavComponent} from './main-nav.component';
 import {ChatNavModule} from './chat-nav/chat-nav.module';
@@ -25,7 +25,8 @@ import {ChatNavModule} from './chat-nav/chat-nav.module';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    MatSliderModule
+    MatSliderModule,
+    MatTooltipModule
   ],
   providers: [ContentDelegationService]
 })

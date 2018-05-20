@@ -2,7 +2,7 @@ const generateMessage = (from, text) => {
   return {
     from,
     text,
-    createdAt: new Data().toLocaleTimeString()
+    createdAt: new Date().toLocaleTimeString()
   }
 };
 

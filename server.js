@@ -10,8 +10,9 @@ const io = socketIO(server);
 const port = process.env.PORT || 3000;
 
 const {isRealString} = require('./utils/validation');
-const {users} = require('./utils/users');
 const {generateMessage} = require('./utils/message');
+const {Users} = require('./utils/users');
+const users = new Users();
 
 io.on('connection', (socket) => {
   console.log('user connected', socket.id);
@@ -22,10 +23,7 @@ io.on('connection', (socket) => {
     }
 
     socket.join(params.room);
-    try {
-      users.removeUser(socket.id);
-    } catch (e) {
-    }
+    users.removeUser(socket.id);
     users.addUser(socket.id, params.name, params.room);
 
     io.to(params.room).emit('updateUserList', users.getUserList(params.room));
@@ -46,15 +44,11 @@ io.on('connection', (socket) => {
   });
 
   socket.on('disconnect', () => {
-    try {
-      const user = users.removeUser(socket.id);
+    const user = users.removeUser(socket.id);
 
-
-      if (user) {
-        io.to(user.room).emit('updateUserList', users.getUserList(user.room));
-        io.to(user.room).emit('newMessage', generateMessage('Admin', `${user.name} has left.`));
-      }
-    } catch (e) {
+    if (user) {
+      io.to(user.room).emit('updateUserList', users.getUserList(user.room));
+      io.to(user.room).emit('newMessage', generateMessage('Admin', `${user.name} has left.`));
     }
   });
 });

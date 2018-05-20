@@ -16,7 +16,7 @@ import {JoinChatComponent} from './join-chat/join-chat.component';
     MatButtonModule,
     MatFormFieldModule,
     MatIconModule,
-    MatInputModule
+    MatInputModule,
   ],
   declarations: [ChatNavComponent, ChatComponent, JoinChatComponent],
   exports: [ChatNavComponent],

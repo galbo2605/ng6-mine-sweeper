@@ -4,10 +4,10 @@
       <mat-form-field class="header__board-size">
         <mat-select #bSize
                     placeholder="Board Size"
-                    [value]="boardSizes[0]"
-                    (selectionChange)="setBoardDifficulty(bSize.value[0],bSize.value[1])">
-          <mat-option *ngFor="let size of boardSizes" [value]="[size[0],size[1]]">
-            {{size[0]}} by {{size[1]}}
+                    [value]="mineSweeper.size[0]"
+                    (selectionChange)="mineSweeper.setMines(bSize.value.y,bSize.value.x)">
+          <mat-option *ngFor="let size of mineSweeper.size" [value]="size">
+            {{size.y}} by {{size.x}}
           </mat-option>
         </mat-select>
       </mat-form-field>
@@ -16,24 +16,26 @@
       <button mat-icon-button
               matTooltip="Refresh Board"
               color="warn"
-              (click)="bomb=false; setBoardDifficulty(bSize.value[0],bSize.value[1]); score=0">
+              (click)="bomb=false;
+              mineSweeper.setMines(bSize.value.y,bSize.value.x);
+              mineSweeper.score=0">
         <mat-icon>refresh</mat-icon>
-      </button> Score: {{score}}
+      </button> Score: {{mineSweeper.score}}
     </div>
     <div>
-      <span>Easiness: {{difficulty}}</span>
+      <span>Easiness: {{mineSweeper.difficulty}}</span>
       <mat-slider [min]="0.1"
                   [max]="1.7"
                   [step]="0.1"
                   [thumbLabel]="true"
                   [tickInterval]="'auto'"
-                  (change)="setBoardDifficulty(bSize.value[0],bSize.value[1])"
-                  [(ngModel)]="difficulty"></mat-slider>
+                  (change)="mineSweeper.setMines(bSize.value.y,bSize.value.x)"
+                  [(ngModel)]="mineSweeper.difficulty"></mat-slider>
     </div>
   </div>
   <table>
     <tbody>
-    <tr *ngFor="let row of sweeperArr; index as y">
+    <tr *ngFor="let row of mineSweeper.board; index as y">
       <td *ngFor="let field of row; index as x">
         <button class="field"
                 mat-stroked-button
