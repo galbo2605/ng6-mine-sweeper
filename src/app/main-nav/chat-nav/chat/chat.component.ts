@@ -1,4 +1,13 @@
-import {Component, HostBinding, OnDestroy, OnInit, Renderer2, TemplateRef, ViewChild, ViewContainerRef} from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  HostBinding,
+  OnDestroy,
+  OnInit, QueryList,
+  TemplateRef,
+  ViewChild, ViewChildren,
+  ViewContainerRef
+} from '@angular/core';
 import {SocketIoService} from '../../shared/socket-io.service';
 import {slideInDownAnimation} from '../../../animations/animations';
 import {Router} from '@angular/router';
@@ -12,12 +21,12 @@ import {Subscription} from 'rxjs';
   styleUrls: ['./chat.component.css'],
   animations: [slideInDownAnimation]
 })
-export class ChatComponent implements OnInit, OnDestroy {
+export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
   @HostBinding('@routeAnimation') routeAnimation = true;
   @HostBinding('style.display') display = 'block';
-  @ViewChild('chatMessages') chatMessagesV1: any;
-  @ViewChild('messageTemplate', {read: TemplateRef}) messageTemplate: any;
-  @ViewChild('chatMessages', {read: ViewContainerRef}) chatMessages: any;
+  @ViewChildren('chatMessages') chatMessagesListener: QueryList<any>;
+  @ViewChild('messageTemplate', {read: TemplateRef}) messageTemplate: TemplateRef<any>;
+  @ViewChild('chatMessagesContainer', {read: ViewContainerRef}) chatMessagesContainer: ViewContainerRef;
 
   chat = {
     room: '',
@@ -25,10 +34,10 @@ export class ChatComponent implements OnInit, OnDestroy {
     users: []
   };
 
-  socketSubscription: Subscription;
+  socketSub: Subscription;
+  cMlistenerSub: Subscription;
 
   constructor(private router: Router,
-              private renderer: Renderer2,
               private socketIoService: SocketIoService) {
   }
 
@@ -37,24 +46,33 @@ export class ChatComponent implements OnInit, OnDestroy {
     if (!this.chat.room || !this.chat.user) {
       this.router.navigate(['']);
     }
-
-    this.socketSubscription = this.socketIoService.onMessageReceived().pipe(
+    this.socketSub = this.socketIoService.recieveMessage().pipe(
       catchError(e => {
-        console.log(e);
+        console.log('socketSub catchError');
         return observableOf({text: 'error', from: 'something went wrong'});
       })
     ).subscribe(cb => {
-      this.onSendMessage(cb.text, cb.from);
+      this.displayMessage(cb.text, cb.from);
     });
   }
 
-  onSendMessage(message: string, from: string) {
+  ngAfterViewInit() {
+    this.cMlistenerSub = this.chatMessagesListener.changes.subscribe(value => {
+      value.first.nativeElement.scrollTop = value.first.nativeElement.scrollHeight;
+    });
+  }
+
+  onSendMessage(message: string) {
     if (message) {
       this.socketIoService.sendMessage(message);
-      const view = this.messageTemplate
-        .createEmbeddedView({message: message, from: from, time: new Date().toLocaleTimeString()});
-      this.chatMessages.insert(view);
-      this.chatMessagesV1.nativeElement.scrollTop = this.chatMessagesV1.nativeElement.scrollHeight;
+    }
+  }
+
+  displayMessage(message: string, from: string) {
+    if (message) {
+      const view = this.messageTemplate.createEmbeddedView(
+        {message: message, from: from, time: new Date().toLocaleTimeString()});
+      this.chatMessagesContainer.insert(view);
     }
   }
 
@@ -64,6 +82,7 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.socketIoService.disconnect();
-    this.socketSubscription.unsubscribe();
+    this.socketSub.unsubscribe();
+    this.cMlistenerSub.unsubscribe();
   }
 }

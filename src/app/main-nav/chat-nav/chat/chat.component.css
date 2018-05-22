@@ -27,6 +27,7 @@
 .chat-footer {
   display: flex;
   justify-content: space-between;
+  padding-top: 0.5rem;
   background-color: rgba(0, 0, 255, 0.10);
   font-size: 1rem;
   color: white;

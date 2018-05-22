@@ -17,6 +17,9 @@ export class SocketIoService {
   };
 
   constructor() {
+  }
+
+  initSocket(): void {
     this.socket = io(this.url);
   }
 
@@ -27,10 +30,11 @@ export class SocketIoService {
   }
 
   sendMessage(message: string) {
-    this.socket.emit('newMessage', message);
+    this.socket.emit('createMessage', message, () => {
+    });
   }
 
-  onMessageReceived(): Observable<any> {
+  recieveMessage(): Observable<any> {
     return new Observable<any>(observer => {
       this.socket.on('newMessage', cb => {
         return observer.next(cb);
@@ -38,15 +42,14 @@ export class SocketIoService {
     });
   }
 
+  updateUserList() {
+  }
+
   getChatDetails() {
     return this.chat;
   }
 
-  messageListener(): Observable<string> {
-    return;
-  }
-
   disconnect() {
-    this.socket.emit('disconnect', this.socket.id);
+    this.socket.close();
   }
 }

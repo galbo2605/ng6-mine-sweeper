@@ -36,8 +36,8 @@ io.on('connection', (socket) => {
   socket.on('createMessage', (message, callback) => {
     const user = users.getUser(socket.id);
 
-    if (user && isRealString(message.text)) {
-      io.to(user.room).emit('newMessage', generateMessage(user.name, message.text));
+    if (user && isRealString(message)) {
+      io.to(user.room).emit('newMessage', generateMessage(user.name, message));
     }
 
     callback();
@@ -45,6 +45,7 @@ io.on('connection', (socket) => {
 
   socket.on('disconnect', () => {
     const user = users.removeUser(socket.id);
+    console.log(user);
 
     if (user) {
       io.to(user.room).emit('updateUserList', users.getUserList(user.room));

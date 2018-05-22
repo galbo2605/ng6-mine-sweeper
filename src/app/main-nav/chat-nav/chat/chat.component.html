@@ -5,8 +5,8 @@
             matTooltip="Leave Room"
             [routerLink]="''"><mat-icon>close</mat-icon></button>
   </mat-toolbar>
-  <div class="chat-messages">
-    <ng-container #chatMessages></ng-container>
+  <div class="chat-messages" #chatMessages>
+    <ng-container #chatMessagesContainer></ng-container>
   </div>
   <span style="flex: 1 auto"></span>
   <mat-toolbar class="chat-footer">
@@ -15,7 +15,7 @@
     </mat-form-field>
     <button mat-button
             matTooltip="Send"
-            (click)="onSendMessage(message.value, chat.user); message.value=returnRandom()">
+            (click)="onSendMessage(message.value); message.value=returnRandom()">
       <mat-icon>send</mat-icon>
     </button>
   </mat-toolbar>

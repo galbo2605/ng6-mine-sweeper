@@ -19,8 +19,7 @@ import {JoinChatComponent} from './join-chat/join-chat.component';
     MatInputModule,
   ],
   declarations: [ChatNavComponent, ChatComponent, JoinChatComponent],
-  exports: [ChatNavComponent],
-  providers: [SocketIoService]
+  exports: [ChatNavComponent]
 })
 export class ChatNavModule {
 }

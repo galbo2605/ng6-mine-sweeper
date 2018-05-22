@@ -19,6 +19,7 @@ export class JoinChatComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.socketIoService.initSocket();
   }
 
   onJoinRoom(name: string, room: string) {
@@ -27,5 +28,4 @@ export class JoinChatComponent implements OnInit {
       this.router.navigate([{outlets: {chatRouter: ['room']}}]);
     }
   }
-
 }
