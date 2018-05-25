@@ -1,10 +1,14 @@
 <mat-toolbar class="join-chat-header">Join a Room</mat-toolbar>
 <div class="join-chat-container">
   <mat-form-field>
-    <input matInput placeholder="Name" #name value="Gal" required>
+    <input matInput placeholder="Name" #name maxlength="50" required>
+    <mat-hint align="start">name max length</mat-hint>
+    <mat-hint align="end">{{name.value.length}} / 50</mat-hint>
   </mat-form-field>
   <mat-form-field>
-    <input matInput placeholder="Room" #room value="Test Room" required>
+    <input matInput placeholder="Room" #room maxlength="100" value="Main Room" required>
+    <mat-hint align="start">room max length</mat-hint>
+    <mat-hint align="end">{{room.value.length}} / 100</mat-hint>
   </mat-form-field>
   <button mat-button (click)="onJoinRoom(name.value, room.value)">Join Room</button>
 </div>

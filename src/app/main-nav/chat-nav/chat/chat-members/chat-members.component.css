@@ -1,0 +1,30 @@
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 86vh;
+}
+
+.chat-header {
+  display: flex;
+  justify-content: space-between;
+  background-color: rgba(0, 0, 255, 0.10);
+  font-size: 1rem;
+  color: white;
+}
+
+.chat-header__button {
+  width: 100%;
+}
+
+.chat-users {
+  padding: 1rem;
+}
+
+.chat-users__user {
+  display: block;
+  width: 100%;
+  background: white;
+  border-radius: 0.5rem;
+  margin-bottom: 0.5rem;
+  padding: 1rem;
+}

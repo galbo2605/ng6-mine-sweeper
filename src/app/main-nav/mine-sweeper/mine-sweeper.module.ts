@@ -6,7 +6,7 @@ import {FormsModule} from '@angular/forms';
 import {
   MatButtonModule,
   MatFormFieldModule,
-  MatIconModule,
+  MatIconModule, MatInputModule,
   MatOptionModule,
   MatSelectModule,
   MatSliderModule, MatTooltipModule
@@ -19,6 +19,7 @@ import {
     MineSweeperRoutingModule,
     MatButtonModule,
     MatSliderModule,
+    MatInputModule,
     MatFormFieldModule,
     MatSelectModule,
     MatOptionModule,

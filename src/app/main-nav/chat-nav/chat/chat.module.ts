@@ -1,16 +1,15 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {ChatNavComponent} from './chat-nav.component';
 import {MatButtonModule, MatFormFieldModule, MatIconModule, MatInputModule, MatToolbarModule, MatTooltipModule} from '@angular/material';
-import {ChatNavRoutingModule} from './chat-nav-routing.module';
-import {JoinChatComponent} from './join-chat/join-chat.component';
-import {ChatModule} from './chat/chat.module';
+import {ChatComponent} from './chat.component';
+import {ChatMembersComponent} from './chat-members/chat-members.component';
+import {ChatMessengerComponent} from './chat-messenger/chat-messenger.component';
+import {ChatRoutingModule} from './chat-routing.module';
 
 @NgModule({
   imports: [
     CommonModule,
-    ChatModule,
-    ChatNavRoutingModule,
+    ChatRoutingModule,
     MatTooltipModule,
     MatToolbarModule,
     MatButtonModule,
@@ -19,10 +18,11 @@ import {ChatModule} from './chat/chat.module';
     MatInputModule,
   ],
   declarations: [
-    ChatNavComponent,
-    JoinChatComponent,
+    ChatComponent,
+    ChatMembersComponent,
+    ChatMessengerComponent
   ],
-  exports: [ChatNavComponent]
+  exports: [ChatComponent]
 })
-export class ChatNavModule {
+export class ChatModule {
 }

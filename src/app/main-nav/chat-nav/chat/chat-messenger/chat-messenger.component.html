@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="chat-messages" #chatMessages>
+    <ng-container #chatMessagesContainer></ng-container>
+  </div>
+  <mat-toolbar class="chat-footer">
+    <mat-form-field>
+      <input matInput placeholder="Message" value="Hello" maxlength="256" #message>
+      <button mat-button *ngIf="message.value" matSuffix mat-icon-button (click)="message.value=''">
+        <mat-icon>close</mat-icon>
+      </button>
+      <mat-hint align="start">message max length</mat-hint>
+      <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
+    </mat-form-field>
+    <button class="chat-footer__send-btn"
+            mat-button
+            matTooltip="Send"
+            (click)="onSendMessage(message.value); message.value=returnRandom()">
+      <mat-icon>send</mat-icon>
+    </button>
+  </mat-toolbar>
+</div>
+<ng-template #messageTemplate let-messageV1="message" let-from="from" let-time="time">
+  <div class="chat-message" @routeAnimation>
+    <div class="chat-message__header">
+      <span class="chat-message__header__room">{{from}}</span>
+      <span class="chat-message__header__time">{{time}}</span>
+    </div>
+    <p class="chat-message__message">{{messageV1}}</p>
+  </div>
+</ng-template>

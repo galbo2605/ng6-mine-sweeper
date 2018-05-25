@@ -1,20 +1,19 @@
 import {Injectable} from '@angular/core';
 import * as io from 'socket.io-client';
 import {Observable} from 'rxjs/Observable';
+import {Chat, Message} from '../chat-nav/models/chat.model';
+import {Subject} from 'rxjs/Subject';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class SocketIoService {
+  messages = new Subject<Message[]>();
   url = 'http://localhost:3000';
   socket;
 
-  chat = {
-    room: '',
-    user: '',
-    users: []
-  };
+  chat: Chat;
 
   constructor() {
   }
@@ -24,9 +23,18 @@ export class SocketIoService {
   }
 
   setNameAndRoom(name: string, room: string) {
-    this.chat = {room: room, user: name, users: []};
+    this.chat = new Chat(room, name, [], []);
     this.socket.emit('join', {name, room}, () => {
     });
+  }
+
+  storeMessage(message: Message) {
+    this.chat.messages.push(message);
+    this.messages.next(this.chat.messages);
+  }
+
+  setUsersList(users) {
+    this.chat.users = users;
   }
 
   sendMessage(message: string) {
@@ -42,7 +50,12 @@ export class SocketIoService {
     });
   }
 
-  updateUserList() {
+  recieveUserList(): Observable<string[]> {
+    return new Observable<any>(observer => {
+      this.socket.on('updateUserList', cb => {
+        return observer.next(cb);
+      });
+    });
   }
 
   getChatDetails() {
@@ -50,6 +63,8 @@ export class SocketIoService {
   }
 
   disconnect() {
-    this.socket.close();
+    if (this.socket) {
+      this.socket.close();
+    }
   }
 }

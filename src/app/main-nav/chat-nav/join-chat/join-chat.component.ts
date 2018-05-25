@@ -19,13 +19,14 @@ export class JoinChatComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.socketIoService.disconnect();
     this.socketIoService.initSocket();
   }
 
   onJoinRoom(name: string, room: string) {
     if (name && room) {
       this.socketIoService.setNameAndRoom(name, room);
-      this.router.navigate([{outlets: {chatRouter: ['room']}}]);
+      this.router.navigate([{outlets: {chat: ['room']}}]);
     }
   }
 }

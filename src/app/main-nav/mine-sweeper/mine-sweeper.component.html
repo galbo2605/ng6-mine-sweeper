@@ -1,26 +1,25 @@
 <div class="container">
   <div class="header">
     <div>
-      <mat-form-field class="header__board-size">
-        <mat-select #bSize
-                    placeholder="Board Size"
-                    [value]="mineSweeper.size[0]"
-                    (selectionChange)="mineSweeper.setMines(bSize.value.y,bSize.value.x)">
-          <mat-option *ngFor="let size of mineSweeper.size" [value]="size">
-            {{size.y}} by {{size.x}}
-          </mat-option>
-        </mat-select>
+      <mat-form-field style="width: 3rem; margin-right: 0.5rem">
+        <input matInput type="number" placeholder="Height" value="9" #height
+               (change)="mineSweeper.setMines($event.target.value,width.value)">
+      </mat-form-field>
+      <mat-form-field style="width: 3rem">
+        <input matInput type="number" placeholder="Width" value="7" #width
+               (change)="mineSweeper.setMines(height.value,$event.target.value)">
       </mat-form-field>
     </div>
     <div>
       <button mat-icon-button
-              matTooltip="Refresh Board"
+              matTooltip="Reset Board"
               color="warn"
               (click)="bomb=false;
-              mineSweeper.setMines(bSize.value.y,bSize.value.x);
+              mineSweeper.setMines(height.value,width.value);
               mineSweeper.score=0">
         <mat-icon>refresh</mat-icon>
-      </button> Score: {{mineSweeper.score}}
+      </button>
+      Score: {{mineSweeper.score}}
     </div>
     <div>
       <span>Easiness: {{mineSweeper.difficulty}}</span>
@@ -28,7 +27,7 @@
                   max="1.7"
                   step="0.1"
                   thumbLabel="true"
-                  (change)="mineSweeper.setMines(bSize.value.y,bSize.value.x)"
+                  (change)="mineSweeper.setMines(height.value,width.value)"
                   [(ngModel)]="mineSweeper.difficulty"></mat-slider>
     </div>
   </div>

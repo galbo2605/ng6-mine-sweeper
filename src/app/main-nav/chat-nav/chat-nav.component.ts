@@ -1,5 +1,4 @@
-import {Component, HostBinding, OnInit} from '@angular/core';
-import {SocketIoService} from '../shared/socket-io.service';
+import {Component, HostBinding} from '@angular/core';
 import {slideInDownAnimation} from '../../animations/animations';
 
 @Component({
@@ -8,13 +7,10 @@ import {slideInDownAnimation} from '../../animations/animations';
   styleUrls: ['./chat-nav.component.css'],
   animations: [slideInDownAnimation]
 })
-export class ChatNavComponent implements OnInit {
+export class ChatNavComponent {
   @HostBinding('@routeAnimation') routeAnimation = true;
   @HostBinding('style.display') display = 'block';
 
-  constructor(private socketIoService: SocketIoService) {
-  }
-
-  ngOnInit() {
+  constructor() {
   }
 }

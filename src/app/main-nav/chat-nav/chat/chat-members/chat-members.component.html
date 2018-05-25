@@ -1,0 +1,13 @@
+<div class="chat-container">
+  <mat-toolbar class="chat-header">
+    <button class="chat-header__button"
+            mat-button (click)="onChat()"
+            matTooltipShowDelay="400"
+            matTooltip="Return to {{chat.room}}">
+      <mat-icon>keyboard_return</mat-icon>
+    </button>
+  </mat-toolbar>
+  <div class="chat-users">
+    <span class="chat-users__user" *ngFor="let user of chat.users">{{user}}</span>
+  </div>
+</div>
