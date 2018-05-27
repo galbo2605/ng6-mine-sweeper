@@ -12,6 +12,7 @@ export class MineSweeperComponent implements OnInit {
   @HostBinding('@routeAnimation') routeAnimation = true;
   @HostBinding('style.display') display = 'block';
 
+  bomb: boolean;
   // OOP Encapsulation
   mineSweeper = {
     board: [],
@@ -50,5 +51,11 @@ export class MineSweeperComponent implements OnInit {
       }
       return surroundingBombs;
     }
+  }
+
+  onReset(height: number, width: number) {
+    this.mineSweeper.setMines(height, width);
+    this.mineSweeper.score = 0;
+    return false;
   }
 }

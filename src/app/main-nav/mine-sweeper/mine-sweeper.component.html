@@ -14,9 +14,7 @@
       <button mat-icon-button
               matTooltip="Reset Board"
               color="warn"
-              (click)="bomb=false;
-              mineSweeper.setMines(height.value,width.value);
-              mineSweeper.score=0">
+              (click)="bomb=onReset(height.value, width.value)">
         <mat-icon>refresh</mat-icon>
       </button>
       Score: {{mineSweeper.score}}
