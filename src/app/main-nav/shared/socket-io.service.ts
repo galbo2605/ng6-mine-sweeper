@@ -1,8 +1,9 @@
-import {Injectable} from '@angular/core';
+import {Inject, Injectable, PLATFORM_ID} from '@angular/core';
 import * as io from 'socket.io-client';
 import {Observable} from 'rxjs/Observable';
 import {Chat, Message} from '../chat-nav/models/chat.model';
 import {Subject} from 'rxjs/Subject';
+import {isPlatformBrowser} from '@angular/common';
 
 
 @Injectable({
@@ -10,15 +11,25 @@ import {Subject} from 'rxjs/Subject';
 })
 export class SocketIoService {
   messages = new Subject<Message[]>();
-  url = 'http://localhost:3000';
+  url = this.baseURI();
   socket;
 
   chat: Chat;
 
-  constructor() {
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+  }
+
+  baseURI() {
+    if (isPlatformBrowser(this.platformId)) {
+      const protocol = window.location.protocol;
+      const host = window.location.host.split(':')[0];
+      console.log(`${protocol}//${host}`);
+      return `${protocol}//${host}:3000`;
+    }
   }
 
   initSocket(): void {
+    console.log(this.url);
     this.socket = io(this.url);
   }
 
