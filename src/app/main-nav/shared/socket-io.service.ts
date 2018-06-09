@@ -12,6 +12,7 @@ import {isPlatformBrowser} from '@angular/common';
 export class SocketIoService {
   messages = new Subject<Message[]>();
   url = this.baseURI();
+  // url = 'https://ng6-socketio-minesweeper.herokuapp.com:3000';
   socket;
 
   chat: Chat;
@@ -35,7 +36,8 @@ export class SocketIoService {
 
   setNameAndRoom(name: string, room: string) {
     this.chat = new Chat(room, name, [], []);
-    this.socket.emit('join', {name, room}, () => {
+    this.socket.emit('join', {name, room}, (t) => {
+      console.log(t);
     });
   }
 

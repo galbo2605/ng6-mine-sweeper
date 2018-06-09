@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 
-const appPort = process.env.PORT || 8080;
+// const appPort = process.env.PORT || 8080;
 const {join} = require('path');
 
 // Server static files from /browser
@@ -11,10 +11,10 @@ app.get('*', (req, res) => {
   res.sendFile(join(__dirname + '/dist/practice-app-one/index.html'));
 });
 
-// Start the app by listening on the default Heroku port
-app.listen(appPort, () => {
-  console.log(`Node express listening on port ${appPort}`)
-});
+// // Start the app by listening on the default Heroku port
+// app.listen(appPort, () => {
+//   console.log(`Node express listening on port ${appPort}`)
+// });
 
 const http = require('http');
 const socketIoServer = http.Server(app);
@@ -32,6 +32,7 @@ io.on('connection', (socket) => {
   console.log('user connected', socket.id);
 
   socket.on('join', (params, callback) => {
+    console.log(params);
     if (!isRealString(params.name) || !isRealString(params.room)) {
       return callback('Name and Room are required!');
     }
